@@ -17,7 +17,7 @@ class input_verifier():
                 return x
                 break
 
-    def array_string(self, msg):
+    def array_string(self, msg, unique=False):
         '''
         Funcion encargada de verificar que el arrego
         sea de strings
@@ -25,8 +25,32 @@ class input_verifier():
         array_string = []
         while True:
             input = self.check_if_string(self,msg)
+            input = self.format(self, input)
             if input == 'fin':
                 break
-            array_string.append(input)
+            if unique:
+                self.check_if_unique(self, input, array_string)
+            else:
+                array_string.append(input)
             print()
         return array_string
+
+    def check_if_unique(self, input, array):
+        '''
+        Funcion encargada de revisar si el
+        valor ya fue introducido en el
+        arreglo
+        '''
+        if input in array:
+            print('Valor ya introducido')
+        else:
+            return array.append(input)
+
+    def format(self, input):
+        '''
+        Funcion dedicated to standarise
+        the string to a format of lowercase
+        no space
+        '''
+        output = input.lower().replace(' ','-')
+        return output

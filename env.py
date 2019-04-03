@@ -1,13 +1,9 @@
 import os
 environ = {
-	"lenguaje":[
-                    "java":5,
-                    "python":3
-                 ],
-    "Tecnologias":[
-                    "git":5,
-                    "mysql":4
-                  ]
+    'password':'hola',
+	'lenguages':{'java':5,'python':3},
+    'technologies':{'git':5,'mysql':4},
+    'requerimientos':12
 }
 
 os.environ = environ
