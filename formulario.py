@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-import json, os
+import json, os, urllib.request, requests
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 from controllers.input import input_verifier as iv
+host = 'http://localhost:8080'
 
 try:
     from env import os
@@ -34,6 +35,7 @@ print('Introduce los Tecnologias que sabes')
 print('Para terminar Introduce fin')
 print()
 technologies = iv.array_string(iv, 'Tecnologias', True)
+
 #Get score of technologies
 score = 0
 
@@ -51,6 +53,8 @@ for score_tegnologie in score_tegnologies:
 
 print()
 if score >= os.environ.get('requerimientos'):
-    print('contratado')
+    data = {'status':'true'}
+    contents = requests.request(method='GET',url='{}/vacante/{}/status'.format(host, os.environ.get('vacante')), data=data)
 else:
-    print('No contratado')
+    data = {'status':'false'}
+    contents = requests.request(method='GET',url='{}/vacante/{}/status'.format(host, os.environ.get('vacante')), data=data)
